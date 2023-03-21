@@ -13,43 +13,19 @@ data class SearchNewsResponse(
 @Keep
 @Serializable
 data class BaseResponse(
-    @SerialName("docs")
-    val docs: List<Article>?
+    @SerialName("results")
+    val docs: List<Actor>?
 )
 
 @Keep
 @Serializable
-data class Article(
-    @SerialName("abstract")
-    val abstract: String?,
-    @SerialName("byline")
-    val byline: Byline?,
-    @SerialName("headline")
-    val headline: HeadLine?,
-    @SerialName("multimedia")
-    val multimedia: List<MultiMedia>?,
+data class Actor(
+    @SerialName("name")
+    val name: String?,
+    @SerialName("profile_path")
+    val profilePath: String?,
+    @SerialName("overview")
+    val overview: String?,
 ) : java.io.Serializable {
-    val mediaImageUrl = "https://www.nytimes.com/${multimedia?.firstOrNull { it.url != null }?.url ?: ""}"
+    val mediaImageUrl = profilePath
 }
-
-@Keep
-@Serializable
-data class HeadLine(
-    @SerialName("main")
-    val main: String
-) : java.io.Serializable
-
-@Keep
-@Serializable
-data class Byline(
-    @SerialName("original")
-    val original: String? = null
-) : java.io.Serializable
-
-
-@Keep
-@Serializable
-data class MultiMedia(
-    @SerialName("url")
-    val url: String?
-) : java.io.Serializable
